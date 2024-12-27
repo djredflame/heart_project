@@ -65,7 +65,6 @@ void setup()
   pinMode(BTN_BACK, INPUT_PULLUP);
 
   currentMenu->show();
-  Serial.println("Initial menu displayed");
 }
 
 void loop()
