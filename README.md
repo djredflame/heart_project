@@ -4,6 +4,12 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
 
 ---
 
+## **Schematics**
+
+![LCD Example](./docs/images/lcd_example.png)
+
+---
+
 ## **Features** ✨
 
 - **Dynamic Menu System:** 📋
