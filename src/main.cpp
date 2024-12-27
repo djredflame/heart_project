@@ -40,20 +40,19 @@ void setup()
   lcd.init();
   lcd.clear();
 
-  // Add menu items
+  // Add items to the main menu
   mainMenuItems.push_back("Option 1");
   mainMenuItems.push_back("Option 2");
   mainMenuItems.push_back("Option 3");
 
+  // Add items to the sub menu
   subMenuItems.push_back("Sub-Option 1");
   subMenuItems.push_back("Sub-Option 2");
 
+  // Add items to the sub-sub menu
   subSubMenuItems.push_back("Sub-Sub-1");
-  subSubMenuItems.push_back("Sub-Sub-2");
 
-  Serial.println("Submenus linked");
-
-  // Link menus
+ // Set up menu hierarchy
   subMenu.setSubMenu(&subSubMenu);
   mainMenu.setSubMenu(&subMenu);
 

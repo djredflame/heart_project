@@ -1,10 +1,21 @@
 #include "Menu.h"
 
 // Constructor: Initializes the menu with a reference to an LCD controller and a list of items
+/**
+ * @brief Initializes the menu with a reference to an LCD controller and a list of items.
+ *
+ * @param lcdController Reference to the LCD controller.
+ * @param items List of menu items.
+ */
 Menu::Menu(LCDController &lcdController, SimpleVector<String> &items)
     : lcd(lcdController), menuItems(items), currentIndex(0), subMenu(nullptr), parentMenu(nullptr) {}
 
 // Sets the submenu for this menu and establishes a parent-child relationship
+/**
+ * @brief Sets the submenu for this menu and establishes a parent-child relationship.
+ *
+ * @param submenu Pointer to the submenu.
+ */
 void Menu::setSubMenu(Menu *submenu)
 {
     subMenu = submenu;
@@ -15,12 +26,20 @@ void Menu::setSubMenu(Menu *submenu)
 }
 
 // Sets the parent menu for this menu
+/**
+ * @brief Sets the parent menu for this menu.
+ *
+ * @param parent Pointer to the parent menu.
+ */
 void Menu::setParentMenu(Menu *parent)
 {
     parentMenu = parent;
 }
 
 // Displays the current menu items on the LCD
+/**
+ * @brief Displays the current menu items on the LCD.
+ */
 void Menu::show()
 {
     lcd.clear();
@@ -40,6 +59,9 @@ void Menu::show()
 }
 
 // Moves to the next menu item
+/**
+ * @brief Moves to the next menu item.
+ */
 void Menu::next()
 {
     if (menuLength > 0)
@@ -50,6 +72,9 @@ void Menu::next()
 }
 
 // Moves to the previous menu item
+/**
+ * @brief Moves to the previous menu item.
+ */
 void Menu::previous()
 {
     if (menuLength > 0)
@@ -60,12 +85,22 @@ void Menu::previous()
 }
 
 // Selects the current menu item and returns the submenu if available
+/**
+ * @brief Selects the current menu item and returns the submenu if available.
+ *
+ * @return Pointer to the submenu if available, otherwise returns this menu.
+ */
 Menu *Menu::select()
 {
     return (subMenu != nullptr) ? subMenu : this;
 }
 
 // Goes back to the parent menu if available
+/**
+ * @brief Goes back to the parent menu if available.
+ *
+ * @return Pointer to the parent menu if available, otherwise returns this menu.
+ */
 Menu *Menu::back()
 {
     return (parentMenu != nullptr) ? parentMenu : this;

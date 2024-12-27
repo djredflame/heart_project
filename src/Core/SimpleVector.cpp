@@ -2,6 +2,9 @@
 #include <Arduino.h>
 
 // Constructor
+/**
+ * @brief Constructs a SimpleVector with an initial capacity of 4.
+ */
 template <typename T>
 SimpleVector<T>::SimpleVector() : capacity(4), size(0)
 {
@@ -9,6 +12,9 @@ SimpleVector<T>::SimpleVector() : capacity(4), size(0)
 }
 
 // Destructor
+/**
+ * @brief Destructs the SimpleVector and releases allocated memory.
+ */
 template <typename T>
 SimpleVector<T>::~SimpleVector()
 {
@@ -16,6 +22,9 @@ SimpleVector<T>::~SimpleVector()
 }
 
 // Resize function
+/**
+ * @brief Resizes the vector to double its current capacity.
+ */
 template <typename T>
 void SimpleVector<T>::resize()
 {
@@ -29,7 +38,12 @@ void SimpleVector<T>::resize()
     data = newData;
 }
 
-// Add element to the end
+/**
+ * @brief Adds an element to the end of the vector.
+ * Resizes the vector if the current capacity is reached.
+ *
+ * @param value The value to be added to the vector.
+ */
 template <typename T>
 void SimpleVector<T>::push_back(const T &value)
 {
@@ -40,21 +54,35 @@ void SimpleVector<T>::push_back(const T &value)
     data[size++] = value;
 }
 
-// Access an element by index (modifiable)
+/**
+ * @brief Overloads the subscript operator to access elements.
+ *
+ * @param index The index of the element to access.
+ * @return Reference to the element at the specified index.
+ */
 template <typename T>
 T &SimpleVector<T>::operator[](int index)
 {
     return data[index];
 }
 
-// Access an element by index (read-only)
+/**
+ * @brief Overloads the subscript operator to access elements (read-only).
+ *
+ * @param index The index of the element to access.
+ * @return Const reference to the element at the specified index.
+ */
 template <typename T>
 const T &SimpleVector<T>::operator[](int index) const
 {
     return data[index];
 }
 
-// Get the current size
+/**
+ * @brief Returns the size of the vector.
+ *
+ * @return The number of elements in the vector.
+ */
 template <typename T>
 int SimpleVector<T>::getSize() const
 {
