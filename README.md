@@ -1,6 +1,6 @@
 # **HEARTPROJECT**
 
-An advanced modular system for managing a 16x2 LCD display, navigable menus, and LED animations using Arduino Uno. The project is built with PlatformIO and VS Code, designed for scalability and easy feature integration. This project has been developed with the invaluable assistance of ChatGPT 🤖, which provided guidance, support, and inspiration throughout the development process.
+An advanced modular system for managing a 16x2 LCD display, navigable menus, and LED animations using Arduino. The project is built with PlatformIO and VS Code, designed for scalability and easy feature integration. This project has been developed with the invaluable assistance of ChatGPT 🤖, which provided guidance, support, and inspiration throughout the development process.
 
 ---
 
