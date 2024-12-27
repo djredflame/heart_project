@@ -57,7 +57,7 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/djredflame/heartproject.git
+   git clone https://github.com/djredflame/heart_project.git
    cd heartproject
    ```
 
