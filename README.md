@@ -1,6 +1,6 @@
 # **HEARTPROJECT**
 
-An advanced modular system for managing a 16x2 LCD display, navigable menus, and LED animations using Arduino. The project is built with PlatformIO and VS Code, designed for scalability and easy feature integration. This project has been developed with the invaluable assistance of ChatGPT 🤖, which provided guidance, support, and inspiration throughout the development process.
+An advanced modular system for managing a 16x2 LCD display, navigable menus, and LED animations using a Raspberry Pi Pico 2W (Arduino framework). The project is built with PlatformIO and VS Code, designed for scalability and easy feature integration. This project has been developed with the invaluable assistance of ChatGPT 🤖, which provided guidance, support, and inspiration throughout the development process.
 
 ---
 
@@ -25,6 +25,7 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
 
   - `LCDController` for managing 16x2 LCD displays.
   - Future-ready `LEDController` for LED animations and controls.
+  - Designed and tested specifically for Raspberry Pi Pico 2W hardware.
 
 - **PlatformIO Integration:** 🚀
   - Build, upload, and debug the project seamlessly using PlatformIO.
@@ -80,6 +81,7 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
 
 4. **Build and Upload**
    - Connect your Raspberry Pi Pico 2W via USB (hold BOOTSEL if necessary on first upload).
+   - Ensure that you've selected the correct board in `platformio.ini` (e.g., `board = raspberry-pi-pico-w`).
    - Build and upload the project:
      ```bash
      pio run --target upload
@@ -107,7 +109,7 @@ Detailed documentation is available in the `docs` folder:
 
 - [Project Architecture](./docs/architecture.md): Detailed overview of the system's structure and logic.
 - [How to Use the Menu System](./docs/how_to_use_menu.md): Step-by-step usage guide.
-- [Pico 2W Pinout](./docs/Raspberry/pico-2-w-pinout.pdf): Pico 2W Pinout logic
+- [Pico 2W Pinout PDF](./docs/Raspberry/pico-2-w-pinout.pdf): Pico 2W Pinout logic
 
 ---
 
@@ -149,3 +151,5 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ---
 
 This project was created with significant support and collaboration with ChatGPT 🤖, ensuring innovative solutions and a seamless development experience.
+
+Now optimized for Raspberry Pi Pico 2W development. 🚀
