@@ -20,7 +20,8 @@ private:
     SimpleVector<String> &menuItems; ///< Reference to the list of menu items.
     int menuLength;                  ///< Number of items in the menu.
     int currentIndex;                ///< Index of the currently selected menu item.
-    SimpleVector<Menu *> subMenus;  ///< Vector of pointers to submenus.
+    int startIndex;                  ///< Index of the first menu item currently displayed (for scrolling).
+    SimpleVector<Menu *> subMenus;   ///< Vector of pointers to submenus.
     Menu *parentMenu;                ///< Pointer to the parent menu (if any).
 
 public:

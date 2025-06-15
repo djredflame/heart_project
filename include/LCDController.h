@@ -20,7 +20,7 @@ private:
 public:
     /**
      * @brief Constructor: Initializes the LCDController with the specified pin configuration.
-     * 
+     *
      * @param rs Register select pin.
      * @param en Enable pin.
      * @param d4 Data pin 4.
@@ -42,7 +42,7 @@ public:
 
     /**
      * @brief Prints a message on the LCD at the specified line and column.
-     * 
+     *
      * @param message The message to be printed on the LCD.
      * @param line The line number (0 or 1) where the message will be printed. Default is 0.
      * @param col The column number where the message will start. Default is 0.
@@ -51,11 +51,19 @@ public:
 
     /**
      * @brief Updates the LCD with two lines of text, clearing the screen first.
-     * 
+     *
      * @param line1 The message to be printed on the first line.
      * @param line2 The message to be printed on the second line. Default is an empty string.
      */
     void update(const String &line1, const String &line2 = "");
+
+    /**
+     * @brief Sets the cursor position on the LCD.
+     *
+     * @param col The column number (0-based).
+     * @param row The row number (0-based).
+     */
+    void setCursor(uint8_t col, uint8_t row);
 };
 
 #endif

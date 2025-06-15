@@ -27,10 +27,7 @@ SimpleVector<String> mainMenuItems;
 SimpleVector<String> subMenuItems;
 SimpleVector<String> subSubMenuItems;
 
-Menu mainMenu(lcd, mainMenuItems);
-Menu subMenu(lcd, subMenuItems);
-Menu subSubMenu(lcd, subSubMenuItems);
-Menu *currentMenu = &mainMenu;
+Menu *currentMenu = nullptr;
 
 void setup()
 {
@@ -48,15 +45,21 @@ void setup()
   // Populate sub menu
   subMenuItems.push_back("Sub-Option 1");
   subMenuItems.push_back("Sub-Option 2");
+  subMenuItems.push_back("Sub-Option 3");
 
   // Populate sub-sub menu
   subSubMenuItems.push_back("Sub-Sub-1");
+
+  static Menu mainMenu(lcd, mainMenuItems);
+  static Menu subMenu(lcd, subMenuItems);
+  static Menu subSubMenu(lcd, subSubMenuItems);
+  static Menu *current = &mainMenu;
 
   // Define menu hierarchy using per-entry submenus
   mainMenu.setSubMenu(0, &subMenu);   // Attach Submenu to Option 1 (index 0)
   subMenu.setSubMenu(1, &subSubMenu); // Attach Sub-Submenu to Sub-Option 2 (index 1)
 
-  currentMenu = &mainMenu;
+  currentMenu = current;
 
   // Set up button pins with internal pull-up resistors
   pinMode(BTN_NEXT, INPUT_PULLUP);

@@ -8,7 +8,7 @@
  * @param items List of menu items.
  */
 Menu::Menu(LCDController &lcdController, SimpleVector<String> &items)
-    : lcd(lcdController), menuItems(items), currentIndex(0), parentMenu(nullptr) {}
+    : lcd(lcdController), menuItems(items), currentIndex(0), parentMenu(nullptr), startIndex(0) {}
 
 // Sets the submenu for this menu and establishes a parent-child relationship
 /**
@@ -58,11 +58,24 @@ void Menu::show()
         return;
     }
 
-    for (int i = 0; i < menuLength && i < 2; i++) // Display up to 2 items (for 16x2 LCD)
+    int startIndex = 0;
+    if (menuLength > 2)
     {
-        String item = menuItems[i];
-        lcd.print(i == currentIndex ? ">" : " ", i, 0); // Print '>' for the current selection
-        lcd.print(item.substring(0, 15), i, 1);         // Print the menu item (limit to 15 characters)
+        if (currentIndex == 0)
+            startIndex = 0;
+        else if (currentIndex == menuLength - 1)
+            startIndex = menuLength - 2;
+        else
+            startIndex = currentIndex - 1;
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        int itemIndex = startIndex + i;
+        if (itemIndex >= menuLength) break;
+
+        lcd.print((itemIndex == currentIndex) ? ">" : " ", i, 0);
+        lcd.print(menuItems[itemIndex].substring(0, 15), i, 1);
     }
 }
 
