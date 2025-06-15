@@ -71,6 +71,19 @@ public:
      * @return Pointer to the parent menu if available, otherwise nullptr.
      */
     Menu *back();
+
+    /**
+     * @brief Returns the index of the currently selected menu item.
+     * @return The current index.
+     */
+    int getCurrentIndex() const;
+
+    /**
+     * @brief Returns the menu item at a given index.
+     * @param index Index of the item to retrieve.
+     * @return The menu item string.
+     */
+    String getItem(int index) const;
 };
 
 #endif // MENU_H

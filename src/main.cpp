@@ -17,49 +17,62 @@
 #define BTN_SELECT 13
 #define BTN_BACK 12
 
+#define ONBOARD_LED LED_BUILTIN
+
 // Debounce settings
 unsigned long lastDebounceTime = 0;
 const unsigned long debounceDelay = 300; // 300ms debounce delay
 
 // LCD controller and menu structure
 LCDController lcd(RS, EN, D4, D5, D6, D7);
-SimpleVector<String> mainMenuItems;
-SimpleVector<String> subMenuItems;
-SimpleVector<String> subSubMenuItems;
+// Global SimpleVector declarations removed; now defined inside buildMenuTree()
 
 Menu *currentMenu = nullptr;
+
+Menu *buildMenuTree()
+{
+  // Menu item vectors
+  static SimpleVector<String> itemsMain;
+  static SimpleVector<String> itemsLedControl;
+  static SimpleVector<String> itemsLedOnOff;
+
+  if (itemsMain.size() == 0)
+  {
+    itemsMain.push_back("LED Control");
+    itemsMain.push_back("Games");
+    itemsMain.push_back("Settings");
+
+    itemsLedControl.push_back("On-Off");
+    itemsLedControl.push_back("Draw");
+
+    itemsLedOnOff.push_back("All LEDs On");
+    itemsLedOnOff.push_back("All LEDs Off");
+  }
+
+  // Menu objects
+  static Menu menuMain(lcd, itemsMain);
+  static Menu menuLedControl(lcd, itemsLedControl);
+  static Menu menuLedOnOff(lcd, itemsLedOnOff);
+
+  // Link submenus to their parent items
+  menuMain.setSubMenu(0, &menuLedControl);     // LED Control
+  menuLedControl.setSubMenu(0, &menuLedOnOff); // On-Off
+
+  return &menuMain;
+}
 
 void setup()
 {
   Serial.begin(115200);
+  pinMode(ONBOARD_LED, OUTPUT);
   Serial.println("Starting setup...");
 
   lcd.init();
   lcd.clear();
 
-  // Populate main menu
-  mainMenuItems.push_back("Option 1");
-  mainMenuItems.push_back("Option 2");
-  mainMenuItems.push_back("Option 3");
+  // Legacy menu setup removed in favor of buildMenuTree()
 
-  // Populate sub menu
-  subMenuItems.push_back("Sub-Option 1");
-  subMenuItems.push_back("Sub-Option 2");
-  subMenuItems.push_back("Sub-Option 3");
-
-  // Populate sub-sub menu
-  subSubMenuItems.push_back("Sub-Sub-1");
-
-  static Menu mainMenu(lcd, mainMenuItems);
-  static Menu subMenu(lcd, subMenuItems);
-  static Menu subSubMenu(lcd, subSubMenuItems);
-  static Menu *current = &mainMenu;
-
-  // Define menu hierarchy using per-entry submenus
-  mainMenu.setSubMenu(0, &subMenu);   // Attach Submenu to Option 1 (index 0)
-  subMenu.setSubMenu(1, &subSubMenu); // Attach Sub-Submenu to Sub-Option 2 (index 1)
-
-  currentMenu = current;
+  currentMenu = buildMenuTree();
 
   // Set up button pins with internal pull-up resistors
   pinMode(BTN_NEXT, INPUT_PULLUP);
@@ -87,12 +100,27 @@ void loop()
   if (selectState == LOW && lastSelectState == HIGH && currentMillis - lastDebounceTime > debounceDelay)
   {
     Serial.println("SELECT button pressed");
+    // Save pointer to menu before selection to determine which menu we were in
+    Menu *previousMenu = currentMenu;
     Menu *nextMenu = currentMenu->select();
-    if (nextMenu != currentMenu)
+    currentMenu = nextMenu;
+
+    // Only toggle LED when user selects a terminal action item in the LED On-Off menu
+    // The LED On-Off menu contains "All LEDs On" and "All LEDs Off"
+    // So, if previousMenu's current item is one of those, handle LED
+    String selectedItem = previousMenu->getItem(previousMenu->getCurrentIndex());
+    if (selectedItem == "All LEDs On")
     {
-      currentMenu = nextMenu;
-      currentMenu->show();
+      digitalWrite(ONBOARD_LED, HIGH);
+      Serial.println("LED turned ON");
     }
+    else if (selectedItem == "All LEDs Off")
+    {
+      digitalWrite(ONBOARD_LED, LOW);
+      Serial.println("LED turned OFF");
+    }
+
+    currentMenu->show();
     lastDebounceTime = currentMillis;
   }
   else if (backState == LOW && lastBackState == HIGH && currentMillis - lastDebounceTime > debounceDelay)

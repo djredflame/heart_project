@@ -72,7 +72,8 @@ void Menu::show()
     for (int i = 0; i < 2; i++)
     {
         int itemIndex = startIndex + i;
-        if (itemIndex >= menuLength) break;
+        if (itemIndex >= menuLength)
+            break;
 
         lcd.print((itemIndex == currentIndex) ? ">" : " ", i, 0);
         lcd.print(menuItems[itemIndex].substring(0, 15), i, 1);
@@ -129,4 +130,23 @@ Menu *Menu::select()
 Menu *Menu::back()
 {
     return (parentMenu != nullptr) ? parentMenu : this;
+}
+
+/**
+ * @brief Returns the index of the currently selected menu item.
+ * @return The current index.
+ */
+int Menu::getCurrentIndex() const
+{
+    return currentIndex;
+}
+
+/**
+ * @brief Returns the menu item at a given index.
+ * @param index Index of the item to retrieve.
+ * @return The menu item string.
+ */
+String Menu::getItem(int index) const
+{
+    return menuItems[index];
 }
