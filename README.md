@@ -96,10 +96,10 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
    - Power the Raspberry Pi Pico 2W to display the main menu on the LCD.
 
 2. **Navigation**
-   - **Next (Button 8):** Move to the next menu item. ➡️
-   - **Previous (Button 9):** Move to the previous menu item. ⬅️
-   - **Select (Button 7):** Enter the selected submenu (if available). ✅
-   - **Back (Button 6):** Return to the parent menu. 🔙
+   - **Next (Button 14):** Move to the next menu item. ➡️
+   - **Previous (Button 11):** Move to the previous menu item. ⬅️
+   - **Select (Button 13):** Enter the selected submenu (if available). ✅
+   - **Back (Button 12):** Return to the parent menu. 🔙
 
 ---
 
