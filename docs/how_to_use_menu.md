@@ -16,22 +16,22 @@ The menu system is displayed on a 16x2 LCD screen and allows users to navigate t
 
 The system uses four buttons connected to digital pins:
 
-- **Next (Button 8):**
+- **Next (Button 11):**
 
   - Move to the next menu item.
   - Wraps around to the first item after the last.
 
-- **Previous (Button 9):**
+- **Previous (Button 12):**
 
   - Move to the previous menu item.
   - Wraps around to the last item before the first.
 
-- **Select (Button 7):**
+- **Select (Button 10):**
 
   - Enter the selected submenu (if available).
   - Executes actions associated with the selected item.
 
-- **Back (Button 6):**
+- **Back (Button 9):**
   - Return to the parent menu.
   - If in the main menu, no action is taken.
 
@@ -44,9 +44,9 @@ The system uses four buttons connected to digital pins:
 
 ## **Starting the Menu System** 🚀
 
-1. **Power the Arduino:**
+1. **Power the Raspberry Pi Pico 2W:**
 
-   - Connect the Arduino to a power source (e.g., USB or external).
+   - Connect the Pico 2W via USB to a power source (hold BOOTSEL if necessary).
 
 2. **LCD Initialization:**
 
@@ -99,9 +99,22 @@ The system uses four buttons connected to digital pins:
 3. **Selecting a Submenu:**
 
    - If `Option 2` has a submenu, press **Select** to enter:
+
      ```
      > Sub-Option 1
        Sub-Option 2
+     ```
+
+   - Press **Next** to highlight `Sub-Option 2`:
+
+     ```
+       Sub-Option 1
+     > Sub-Option 2
+     ```
+
+   - Press **Select** again to enter the next level submenu:
+     ```
+     > Sub-Sub-1
      ```
 
 4. **Returning:**
@@ -117,7 +130,7 @@ The system uses four buttons connected to digital pins:
 
 ### **1. No Display on LCD**
 
-- Ensure the LCD is correctly wired to the Arduino.
+- Ensure the LCD is correctly wired to the Raspberry Pi Pico 2W.
 - Verify the `RS`, `EN`, `D4`, `D5`, `D6`, and `D7` pin assignments in the code.
 - Check that `LCDController` is initialized in `setup()`.
 

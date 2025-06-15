@@ -1,4 +1,3 @@
-
 #ifndef SIMPLE_VECTOR_H
 #define SIMPLE_VECTOR_H
 
@@ -18,7 +17,7 @@ class SimpleVector
 private:
     T *data;      ///< Pointer to the dynamically allocated array of elements.
     int capacity; ///< The maximum number of elements the vector can hold before resizing.
-    int size;     ///< The current number of elements in the vector.
+    int _size;    ///< The current number of elements in the vector.
 
     /**
      * @brief Resizes the internal storage to accommodate more elements.
@@ -66,7 +65,7 @@ public:
      *
      * @return The number of elements in the vector.
      */
-    int getSize() const;
+    int size() const { return _size; }
 };
 
 #endif

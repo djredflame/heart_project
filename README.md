@@ -79,7 +79,7 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
    - Search for "PlatformIO IDE" and install it.
 
 4. **Build and Upload**
-   - Connect your Arduino Uno.
+   - Connect your Raspberry Pi Pico 2W via USB (hold BOOTSEL if necessary on first upload).
    - Build and upload the project:
      ```bash
      pio run --target upload
@@ -91,7 +91,7 @@ An advanced modular system for managing a 16x2 LCD display, navigable menus, and
 
 1. **Start the Project**
 
-   - Power the Arduino to display the main menu on the LCD.
+   - Power the Raspberry Pi Pico 2W to display the main menu on the LCD.
 
 2. **Navigation**
    - **Next (Button 8):** Move to the next menu item. ➡️
@@ -107,6 +107,7 @@ Detailed documentation is available in the `docs` folder:
 
 - [Project Architecture](./docs/architecture.md): Detailed overview of the system's structure and logic.
 - [How to Use the Menu System](./docs/how_to_use_menu.md): Step-by-step usage guide.
+- [Pico 2W Pinout](./docs/Raspberry/pico-2-w-pinout.pdf): Pico 2W Pinout logic
 
 ---
 

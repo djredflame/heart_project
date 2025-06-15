@@ -19,6 +19,7 @@ The HEARTPROJECT is designed as a modular system with clear separation of concer
 - **Key Features:**
   - Clear API for controlling the display.
   - Supports multi-line text updates.
+- **Hardware:** Raspberry Pi Pico 2W
 - **File Locations:**
   - Header: `include/LCDController.h`
   - Implementation: `src/Controller/LCDController.cpp`
@@ -28,7 +29,7 @@ The HEARTPROJECT is designed as a modular system with clear separation of concer
 - **Purpose:**
   - Implements a dynamic menu system for the LCD, supporting nested menus and navigation.
 - **Key Features:**
-  - Submenu and parent menu linkage.
+  - Submenu and parent menu linkage, supporting deep nesting (e.g., Sub-Option 2 → Sub-Sub-1).
   - Button-driven navigation (Next, Previous, Select, Back).
 - **File Locations:**
   - Header: `include/Menu.h`
@@ -62,7 +63,7 @@ The HEARTPROJECT is designed as a modular system with clear separation of concer
 
 ### **1. Hardware Interaction**
 
-- **LCDController:** Directly interfaces with the 16x2 LCD display to manage content.
+- **LCDController:** Directly interfaces with the 16x2 LCD display to manage content over the GPIOs of the Pico 2W.
 - **LEDController:** (Planned) Will interface with LEDs for creating animations.
 
 ### **2. Core Logic**
@@ -73,7 +74,7 @@ The HEARTPROJECT is designed as a modular system with clear separation of concer
 
 ### **3. User Inputs**
 
-- Buttons (connected to digital pins):
+- Buttons (connected to the GPIOs of the Raspberry Pi Pico 2W):
   - **Next:** Navigate to the next menu item.
   - **Previous:** Navigate to the previous menu item.
   - **Select:** Enter a submenu or select an option.
@@ -88,20 +89,20 @@ The HEARTPROJECT is designed as a modular system with clear separation of concer
 |       User Input        |
 | (Buttons: Next, Back)   |
 +-------------------------+
-             |
-             v
+            |
+            v
 +-------------------------+
 |      Menu System        |
-|  (Core Navigation Logic) |
+|  (Nested Navigation)    |
 +-------------------------+
-             |
-             v
+            |
+            v
 +-------------------------+
 |     LCD Controller      |
 | (Hardware Interaction)  |
 +-------------------------+
-             |
-             v
+            |
+            v
 +-------------------------+
 |        LCD Display       |
 |     (16x2 Character)     |

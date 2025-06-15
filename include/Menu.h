@@ -20,7 +20,7 @@ private:
     SimpleVector<String> &menuItems; ///< Reference to the list of menu items.
     int menuLength;                  ///< Number of items in the menu.
     int currentIndex;                ///< Index of the currently selected menu item.
-    Menu *subMenu;                   ///< Pointer to the submenu (if any).
+    SimpleVector<Menu *> subMenus;  ///< Vector of pointers to submenus.
     Menu *parentMenu;                ///< Pointer to the parent menu (if any).
 
 public:
@@ -32,10 +32,11 @@ public:
     Menu(LCDController &lcdController, SimpleVector<String> &items);
 
     /**
-     * @brief Sets a submenu for the current menu and links it as a child.
+     * @brief Sets a submenu for the current menu at the given index and links it as a child.
+     * @param index Index of the menu item to associate with the submenu.
      * @param subMenu Pointer to the submenu.
      */
-    void setSubMenu(Menu *subMenu);
+    void setSubMenu(int index, Menu *subMenu);
 
     /**
      * @brief Sets a parent menu for the current menu and links it as a parent.

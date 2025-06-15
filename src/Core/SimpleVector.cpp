@@ -1,12 +1,13 @@
 #include "SimpleVector.h"
 #include <Arduino.h>
+#include <Menu.h>
 
 // Constructor
 /**
  * @brief Constructs a SimpleVector with an initial capacity of 4.
  */
 template <typename T>
-SimpleVector<T>::SimpleVector() : capacity(4), size(0)
+SimpleVector<T>::SimpleVector() : capacity(4), _size(0)
 {
     data = new T[capacity];
 }
@@ -30,7 +31,7 @@ void SimpleVector<T>::resize()
 {
     capacity *= 2;
     T *newData = new T[capacity];
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < _size; ++i)
     {
         newData[i] = data[i];
     }
@@ -47,11 +48,11 @@ void SimpleVector<T>::resize()
 template <typename T>
 void SimpleVector<T>::push_back(const T &value)
 {
-    if (size == capacity)
+    if (_size == capacity)
     {
         resize();
     }
-    data[size++] = value;
+    data[_size++] = value;
 }
 
 /**
@@ -78,17 +79,7 @@ const T &SimpleVector<T>::operator[](int index) const
     return data[index];
 }
 
-/**
- * @brief Returns the size of the vector.
- *
- * @return The number of elements in the vector.
- */
-template <typename T>
-int SimpleVector<T>::getSize() const
-{
-    return size;
-}
-
 // Explicit instantiations
 template class SimpleVector<String>;
 template class SimpleVector<int>;
+template class SimpleVector<Menu *>;

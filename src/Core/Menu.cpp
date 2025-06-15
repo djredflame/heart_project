@@ -8,17 +8,25 @@
  * @param items List of menu items.
  */
 Menu::Menu(LCDController &lcdController, SimpleVector<String> &items)
-    : lcd(lcdController), menuItems(items), currentIndex(0), subMenu(nullptr), parentMenu(nullptr) {}
+    : lcd(lcdController), menuItems(items), currentIndex(0), parentMenu(nullptr) {}
 
 // Sets the submenu for this menu and establishes a parent-child relationship
 /**
  * @brief Sets the submenu for this menu and establishes a parent-child relationship.
  *
+ * @param index Index of the submenu.
  * @param submenu Pointer to the submenu.
  */
-void Menu::setSubMenu(Menu *submenu)
+void Menu::setSubMenu(int index, Menu *submenu)
 {
-    subMenu = submenu;
+    if (subMenus.size() <= index)
+    {
+        while (subMenus.size() <= index)
+        {
+            subMenus.push_back(nullptr);
+        }
+    }
+    subMenus[index] = submenu;
     if (submenu != nullptr)
     {
         submenu->setParentMenu(this);
@@ -43,7 +51,7 @@ void Menu::setParentMenu(Menu *parent)
 void Menu::show()
 {
     lcd.clear();
-    menuLength = menuItems.getSize();
+    menuLength = menuItems.size();
     if (menuLength == 0)
     {
         lcd.print("No Items", 0, 0);
@@ -92,7 +100,11 @@ void Menu::previous()
  */
 Menu *Menu::select()
 {
-    return (subMenu != nullptr) ? subMenu : this;
+    if (currentIndex < subMenus.size() && subMenus[currentIndex] != nullptr)
+    {
+        return subMenus[currentIndex];
+    }
+    return this;
 }
 
 // Goes back to the parent menu if available
